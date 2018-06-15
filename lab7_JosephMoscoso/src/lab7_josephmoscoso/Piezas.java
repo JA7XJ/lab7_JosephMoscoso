@@ -5,15 +5,21 @@
  */
 package lab7_josephmoscoso;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author joseph
  */
 public class Piezas {
+
     private String nombre;
     private String material;
     private int tamaño;
     private int tiempo;
+    private ArrayList<Piezas> padresp = new ArrayList();
+    private ArrayList<Piezas> pieza = new ArrayList();
+    private ArrayList<Autos> padrea = new ArrayList();
 
     public Piezas() {
     }
@@ -57,9 +63,33 @@ public class Piezas {
         this.tiempo = tiempo;
     }
 
+    public ArrayList<Piezas> getPieza() {
+        return pieza;
+    }
+
+    public void setPieza(ArrayList<Piezas> pieza) {
+        this.pieza = pieza;
+    }
+
+    public ArrayList<Piezas> getPadresp() {
+        return padresp;
+    }
+
+    public void setPadresp(ArrayList<Piezas> padresp) {
+        this.padresp = padresp;
+    }
+
+    public ArrayList<Autos> getPadrea() {
+        return padrea;
+    }
+
+    public void setPadrea(ArrayList<Autos> padrea) {
+        this.padrea = padrea;
+    }
+
     @Override
     public String toString() {
         return nombre;
     }
-    
+
 }

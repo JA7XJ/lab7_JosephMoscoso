@@ -7,6 +7,7 @@ package lab7_josephmoscoso;
 
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.MutableTreeNode;
@@ -257,7 +258,7 @@ public class principal extends javax.swing.JFrame {
         jb_ensamblar.setText("Ensamblar");
 
         tr_carros.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Raiz");
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Carros");
         tr_carros.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jScrollPane7.setViewportView(tr_carros);
 
@@ -332,21 +333,33 @@ public class principal extends javax.swing.JFrame {
             Autos x = new Autos(tp_nombrecarro.getText());
             auto.add(new Autos(tp_nombrecarro.getText()));
             DefaultComboBoxModel modelo = (DefaultComboBoxModel) cb_partes.getModel();
-            modelo.addElement(x);
-            cb_partes.setModel(modelo);
+//            modelo.addElement(x);
+//            cb_partes.setModel(modelo);
             DefaultTreeModel m = (DefaultTreeModel) tr_carros.getModel();
             DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) m.getRoot();
             DefaultMutableTreeNode carro;
             carro = new DefaultMutableTreeNode(auto.get(auto.size() - 1).toString());
+            modelo.addElement(carro);
+            cb_partes.setModel(modelo);
             raiz.add(carro);
             m.reload();
         } catch (Exception e) {
-        } 
+        }
     }//GEN-LAST:event_jb_crearcarroMouseClicked
 
     private void jb_crearpiezaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_crearpiezaMouseClicked
         // TODO add your handling code here:
-        
+        try {
+            Piezas x = new Piezas(tp_nombrepieza.getText(), tp_materiales.getText(), Integer.parseInt(tp_tamaño.getText()), Integer.parseInt(tp_tiempo.getText()));
+            DefaultComboBoxModel modelo = (DefaultComboBoxModel) cb_partes.getModel();
+            modelo.addElement(x);
+            pieza.add(x);
+            cb_partes.setModel(modelo);
+            DefaultTreeModel m = (DefaultTreeModel) tr_carros.getModel();
+            m.reload();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ingreso dato invalido probablemente String donde es un numero");
+        }
     }//GEN-LAST:event_jb_crearpiezaMouseClicked
 
     /**
@@ -419,6 +432,6 @@ public class principal extends javax.swing.JFrame {
     private javax.swing.JTextPane tp_tiempo;
     private javax.swing.JTree tr_carros;
     // End of variables declaration//GEN-END:variables
-ArrayList<Autos> auto=new ArrayList();
-ArrayList<Piezas> pieza=new ArrayList();
+ArrayList<Autos> auto = new ArrayList();
+    ArrayList<Piezas> pieza = new ArrayList();
 }

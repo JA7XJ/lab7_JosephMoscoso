@@ -478,7 +478,7 @@
                       </Border>
                     </Property>
                     <Property name="model" type="javax.swing.tree.TreeModel" editor="org.netbeans.modules.form.editors2.TreeModelEditor">
-                      <TreeModel code="Raiz"/>
+                      <TreeModel code="Carros"/>
                     </Property>
                   </Properties>
                 </Component>
