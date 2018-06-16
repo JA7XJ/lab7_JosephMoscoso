@@ -314,13 +314,13 @@ public class principal extends javax.swing.JFrame {
             DefaultTreeModel m = (DefaultTreeModel) tr_carros.getModel();
             DefaultMutableTreeNode combo = (DefaultMutableTreeNode) cb_partes.getSelectedItem();
             DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) m.getRoot();
-            raiz=raiz.getNextNode();
+            //   raiz=raiz.getNextNode();
             DefaultMutableTreeNode piezanueva;
             piezanueva = new DefaultMutableTreeNode(pieza.get(pieza.size() - 1).toString());
             combo.add(piezanueva);
             raiz.add(combo);
             modelo.addElement(x);
-          //  m.reload();
+            //  m.reload();
             //pieza.add(x);
             cb_partes.setModel(modelo);
             m.reload();
