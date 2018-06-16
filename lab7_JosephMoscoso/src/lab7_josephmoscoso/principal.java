@@ -34,10 +34,6 @@ public class principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jd_ensamblar = new javax.swing.JDialog();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        jt_ensamblar = new javax.swing.JTable();
-        jLabel10 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -67,44 +63,6 @@ public class principal extends javax.swing.JFrame {
         jScrollPane7 = new javax.swing.JScrollPane();
         tr_carros = new javax.swing.JTree();
         jLabel1 = new javax.swing.JLabel();
-
-        jt_ensamblar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jt_ensamblar.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane6.setViewportView(jt_ensamblar);
-
-        jLabel10.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        jLabel10.setText("Ensamblaje");
-
-        javax.swing.GroupLayout jd_ensamblarLayout = new javax.swing.GroupLayout(jd_ensamblar.getContentPane());
-        jd_ensamblar.getContentPane().setLayout(jd_ensamblarLayout);
-        jd_ensamblarLayout.setHorizontalGroup(
-            jd_ensamblarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jd_ensamblarLayout.createSequentialGroup()
-                .addGroup(jd_ensamblarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jd_ensamblarLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jd_ensamblarLayout.createSequentialGroup()
-                        .addGap(192, 192, 192)
-                        .addComponent(jLabel10)))
-                .addContainerGap(22, Short.MAX_VALUE))
-        );
-        jd_ensamblarLayout.setVerticalGroup(
-            jd_ensamblarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_ensamblarLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
-        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -352,10 +310,18 @@ public class principal extends javax.swing.JFrame {
         try {
             Piezas x = new Piezas(tp_nombrepieza.getText(), tp_materiales.getText(), Integer.parseInt(tp_tamaño.getText()), Integer.parseInt(tp_tiempo.getText()));
             DefaultComboBoxModel modelo = (DefaultComboBoxModel) cb_partes.getModel();
-            modelo.addElement(x);
             pieza.add(x);
-            cb_partes.setModel(modelo);
             DefaultTreeModel m = (DefaultTreeModel) tr_carros.getModel();
+            DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) cb_partes.getSelectedItem();
+            DefaultMutableTreeNode raiz2 = (DefaultMutableTreeNode) m.getRoot();
+            raiz2=raiz2.getNextNode();
+            DefaultMutableTreeNode carro;
+            carro = new DefaultMutableTreeNode(pieza.get(pieza.size() - 1).toString());
+            raiz.add(carro);
+            raiz2.add(raiz);
+            modelo.addElement(x);
+            //pieza.add(x);
+            cb_partes.setModel(modelo);
             m.reload();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Ingreso dato invalido probablemente String donde es un numero");
@@ -401,7 +367,6 @@ public class principal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cb_autos;
     private javax.swing.JComboBox<String> cb_partes;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -417,14 +382,11 @@ public class principal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JButton jb_crearcarro;
     private javax.swing.JButton jb_crearpieza;
     private javax.swing.JButton jb_ensamblar;
-    private javax.swing.JDialog jd_ensamblar;
-    private javax.swing.JTable jt_ensamblar;
     private javax.swing.JTextField tp_materiales;
     private javax.swing.JTextPane tp_nombrecarro;
     private javax.swing.JTextPane tp_nombrepieza;
