@@ -62,6 +62,7 @@ public class principal extends javax.swing.JFrame {
         jb_ensamblar = new javax.swing.JButton();
         jScrollPane7 = new javax.swing.JScrollPane();
         tr_carros = new javax.swing.JTree();
+        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -220,6 +221,13 @@ public class principal extends javax.swing.JFrame {
         tr_carros.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jScrollPane7.setViewportView(tr_carros);
 
+        jButton1.setText("eliminar");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -230,15 +238,17 @@ public class principal extends javax.swing.JFrame {
                         .addGap(363, 363, 363)
                         .addComponent(jLabel9))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(342, 342, 342)
-                        .addComponent(jb_ensamblar))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(280, 280, 280)
                         .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(317, 317, 317)
-                        .addComponent(cb_autos, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(382, Short.MAX_VALUE))
+                        .addComponent(cb_autos, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(265, 265, 265)
+                        .addComponent(jb_ensamblar)
+                        .addGap(90, 90, 90)
+                        .addComponent(jButton1)))
+                .addContainerGap(370, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -248,7 +258,9 @@ public class principal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cb_autos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jb_ensamblar)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jb_ensamblar)
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(20, Short.MAX_VALUE))
@@ -291,6 +303,7 @@ public class principal extends javax.swing.JFrame {
             Autos x = new Autos(tp_nombrecarro.getText());
             auto.add(new Autos(tp_nombrecarro.getText()));
             DefaultComboBoxModel modelo = (DefaultComboBoxModel) cb_partes.getModel();
+            DefaultComboBoxModel modelo2 = (DefaultComboBoxModel) cb_autos.getModel();
 //            modelo.addElement(x);
 //            cb_partes.setModel(modelo);
             DefaultTreeModel m = (DefaultTreeModel) tr_carros.getModel();
@@ -298,7 +311,9 @@ public class principal extends javax.swing.JFrame {
             DefaultMutableTreeNode carro;
             carro = new DefaultMutableTreeNode(auto.get(auto.size() - 1).toString());
             modelo.addElement(carro);
+            modelo2.addElement(carro);
             cb_partes.setModel(modelo);
+            cb_autos.setModel(modelo2);
             raiz.add(carro);
             m.reload();
         } catch (Exception e) {
@@ -308,26 +323,52 @@ public class principal extends javax.swing.JFrame {
     private void jb_crearpiezaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_crearpiezaMouseClicked
         // TODO add your handling code here:
         try {
-            Piezas x = new Piezas(tp_nombrepieza.getText(), tp_materiales.getText(), Integer.parseInt(tp_tamaño.getText()), Integer.parseInt(tp_tiempo.getText()));
-            DefaultComboBoxModel modelo = (DefaultComboBoxModel) cb_partes.getModel();
-            pieza.add(x);
-            DefaultTreeModel m = (DefaultTreeModel) tr_carros.getModel();
-            DefaultMutableTreeNode combo = (DefaultMutableTreeNode) cb_partes.getSelectedItem();
-            DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) m.getRoot();
-            //   raiz=raiz.getNextNode();
-            DefaultMutableTreeNode piezanueva;
-            piezanueva = new DefaultMutableTreeNode(pieza.get(pieza.size() - 1).toString());
-            combo.add(piezanueva);
-            raiz.add(combo);
-            modelo.addElement(x);
-            //  m.reload();
-            //pieza.add(x);
-            cb_partes.setModel(modelo);
-            m.reload();
+            if (c==0) {
+                Piezas x = new Piezas(tp_nombrepieza.getText(), tp_materiales.getText(), Integer.parseInt(tp_tamaño.getText()), Integer.parseInt(tp_tiempo.getText()));
+                DefaultComboBoxModel modelo = (DefaultComboBoxModel) cb_partes.getModel();
+                pieza.add(x);
+                DefaultTreeModel m = (DefaultTreeModel) tr_carros.getModel();
+                DefaultMutableTreeNode combo = (DefaultMutableTreeNode) cb_partes.getSelectedItem();
+                DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) m.getRoot();
+                //   raiz=raiz.getNextNode();
+                DefaultMutableTreeNode piezanueva;
+                piezanueva = new DefaultMutableTreeNode(pieza.get(pieza.size() - 1).toString());
+                combo.add(piezanueva);
+                raiz.add(combo);
+                modelo.addElement(piezanueva);
+                //  m.reload();
+                //pieza.add(x);
+                cb_partes.setModel(modelo);
+                m.reload();
+                c++;
+            }else{
+                Piezas x = new Piezas(tp_nombrepieza.getText(), tp_materiales.getText(), Integer.parseInt(tp_tamaño.getText()), Integer.parseInt(tp_tiempo.getText()));
+                DefaultComboBoxModel modelo = (DefaultComboBoxModel) cb_partes.getModel();
+                pieza.add(x);
+                DefaultTreeModel m = (DefaultTreeModel) tr_carros.getModel();
+                DefaultMutableTreeNode combo = (DefaultMutableTreeNode) cb_partes.getSelectedItem();
+                DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) m.getRoot();
+                raiz=raiz.getNextNode();
+                DefaultMutableTreeNode piezanueva;
+                piezanueva = new DefaultMutableTreeNode(pieza.get(pieza.size() - 1).toString());
+                combo.add(piezanueva);
+                raiz.add(combo);
+                modelo.addElement(piezanueva);
+                //  m.reload();
+                //pieza.add(x);
+                cb_partes.setModel(modelo);
+                m.reload();
+            }
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Ingreso dato invalido probablemente String donde es un numero");
         }
     }//GEN-LAST:event_jb_crearpiezaMouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        tr_carros.removeSelectionPath(tr_carros.getSelectionPath());
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -367,6 +408,7 @@ public class principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cb_autos;
     private javax.swing.JComboBox<String> cb_partes;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -397,4 +439,5 @@ public class principal extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 ArrayList<Autos> auto = new ArrayList();
     ArrayList<Piezas> pieza = new ArrayList();
+    int c;
 }
